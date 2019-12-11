@@ -30,4 +30,4 @@ brew install hugo | indent
 echo "\n-----> Building the site"
 cd $BUILD_DIR
 mkdir -p public | indent
-./hugo -D | indent
+hugo -D | indent
