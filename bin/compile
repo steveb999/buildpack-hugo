@@ -1,0 +1,22 @@
+#!/bin/sh
+set -e
+
+# Used to format the output based on heroku guidelines
+# https://devcenter.heroku.com/articles/buildpack-api#style
+indent() {
+  RE="s/^/       /"
+  sed $SED_FLAG "$RE"
+}
+
+BUILD_DIR=$1
+CACHE_DIR=$2
+ENV_DIR=$3
+
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)" | indent
+brew install hugo | indent
+
+# Build the site
+echo "\n-----> Building the site"
+cd $BUILD_DIR
+mkdir -p public | indent
+./hugo -D | indent
